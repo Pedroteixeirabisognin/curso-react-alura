@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Tabela from './Tabela';
+
+import Form from './Formulario';
+
 
 class App extends Component {
 
@@ -35,6 +38,8 @@ class App extends Component {
 
     this.setState( 
         {
+
+          
             autores : autores.filter((autor, posAtual) => {
                     return posAtual !== index;
             }),
@@ -42,11 +47,18 @@ class App extends Component {
     );
   }
 
+  //Metodo que adiciona um novo autor ao array de autores dentro do state
+  escutadorDeSubmit = autor => {
+    this.setState({ autores:[...this.state.autores, autor]})
+  }
+
+  //Envio o método escutadorDeSubmit para o form
   render() {
     return (
-      <div className="App">
-        <Tabela autores = { this.state.autores } removeAutor = { this.removeAutor }/>
-      </div>
+      <Fragment>
+        <Tabela autores = { this.state.autores } removeAutor = { this.removeAutor } />
+        <Form escutadorDeSubmit={this.escutadorDeSubmit}/>
+      </Fragment>
     );
   }
 
