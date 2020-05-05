@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
-import './App.css';
+//import logo from './logo.svg';
+import 'materialize-css/dist/css/materialize.min.css';
 import Tabela from './Tabela';
-
+import Header from './Header';
 import Form from './Formulario';
 
 
@@ -33,31 +33,35 @@ class App extends Component {
     ],
   }
 
-  removeAutor = index  =>{
+  removeAutor = index => {
     const { autores } = this.state;
 
-    this.setState( 
-        {
+    this.setState(
+      {
 
-          
-            autores : autores.filter((autor, posAtual) => {
-                    return posAtual !== index;
-            }),
-        }
+
+        autores: autores.filter((autor, posAtual) => {
+          return posAtual !== index;
+        }),
+      }
     );
   }
 
   //Metodo que adiciona um novo autor ao array de autores dentro do state
   escutadorDeSubmit = autor => {
-    this.setState({ autores:[...this.state.autores, autor]})
+    this.setState({ autores: [...this.state.autores, autor] })
   }
 
   //Envio o método escutadorDeSubmit para o form
   render() {
     return (
       <Fragment>
-        <Tabela autores = { this.state.autores } removeAutor = { this.removeAutor } />
-        <Form escutadorDeSubmit={this.escutadorDeSubmit}/>
+        <Header />
+        <div className="container mb-10">
+          <Tabela autores={this.state.autores} removeAutor={this.removeAutor} />
+    
+        <Form escutadorDeSubmit={this.escutadorDeSubmit} />
+        </div>
       </Fragment>
     );
   }
